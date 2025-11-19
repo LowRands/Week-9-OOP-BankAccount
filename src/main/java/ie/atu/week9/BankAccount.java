@@ -7,7 +7,7 @@ public class BankAccount {
 
     public BankAccount(String accNo, String name, double balance)
     {
-        if(balance <= 0)
+        if( balance <= 0)
         {
             throw new IllegalArgumentException("Balance must be greater than 0.");
         }
@@ -27,5 +27,10 @@ public class BankAccount {
     }
     public double getBalance() {
         return balance;
+    }
+
+    public void deposit(double depositAmount) {
+        balance += depositAmount;
+        System.out.println("Deposited " + balance + " to account " + accNo);
     }
 }
