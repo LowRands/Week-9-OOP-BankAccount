@@ -28,7 +28,7 @@ public class BankAccountTest {
     void constructorNegativeInitialisation()
     {
        Exception ex = assertThrows(IllegalArgumentException.class, () -> new BankAccount("ACC12345", "Ethan",-100));
-       assertEquals("Balance must be greater than 0", ex.getMessage());
+       assertEquals("Balance must be greater than 0.", ex.getMessage());
     }
 }
 
