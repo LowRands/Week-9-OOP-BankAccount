@@ -101,6 +101,7 @@ public class BankAccountTest {
 
             assertEquals("Withdrawal amount must be greater than zero", ex.getMessage());
         }
+
         @Test
         void withdraw_moreThanBalance_throwsException() {
             // Arrange
