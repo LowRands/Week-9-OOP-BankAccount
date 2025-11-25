@@ -63,6 +63,61 @@ public class BankAccountTest {
 
         assertEquals("Deposit amount must be greater than zero", ex.getMessage());
     }
+    @Test
+    void withdraw_positiveAmount_reducesBalance() {
+        // Arrange
+        BankAccount account = new BankAccount();
+        account.deposit(100);  // initial balance
+
+        // Act
+        account.withdraw(40);
+
+        // Assert
+        assertEquals(60, account.getBalance());
+    }
+
+        @Test
+        void withdraw_zeroAmount_throwsException() {
+            BankAccount account = new BankAccount();
+            account.deposit(100); // ensure sufficient balance
+
+            IllegalArgumentException ex = assertThrows(
+                    IllegalArgumentException.class,
+                    () -> account.withdraw(0)
+            );
+
+            assertEquals("Withdrawal amount must be greater than zero", ex.getMessage());
+        }
+
+        @Test
+        void withdraw_negativeAmount_throwsException() {
+            BankAccount account = new BankAccount();
+            account.deposit(100);
+
+            IllegalArgumentException ex = assertThrows(
+                    IllegalArgumentException.class,
+                    () -> account.withdraw(-30)
+            );
+
+            assertEquals("Withdrawal amount must be greater than zero", ex.getMessage());
+        }
+
+        @Test
+        void withdraw_moreThanBalance_throwsException() {
+            // Arrange
+            BankAccount account = new BankAccount();
+            account.deposit(100);  // current balance
+
+            // Act + Assert
+            IllegalArgumentException ex = assertThrows(
+                    IllegalArgumentException.class,
+                    () -> account.withdraw(150)
+            );
+
+            assertEquals("Insufficient funds", ex.getMessage());
+        }
 }
+
+
 
 
