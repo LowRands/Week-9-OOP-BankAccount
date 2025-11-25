@@ -33,4 +33,11 @@ public class BankAccount {
         balance += depositAmount;
         System.out.println("Deposited " + balance + " to account " + accNo);
     }
+    public void depositNegative(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be greater than zero");
+        }
+        balance += amount;
+    }
+
 }
