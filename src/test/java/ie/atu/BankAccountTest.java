@@ -11,14 +11,12 @@ public class BankAccountTest {
     BankAccount account;
 
     @BeforeEach
-    void setup()
-    {
+    void setup() {
         account = new BankAccount();
     }
 
     @Test
-    void constructorInitialisation()
-    {
+    void constructorInitialisation() {
         account = new BankAccount("ACC12345", "Ethan", 100);
         assertEquals("ACC12345", account.getACCNo());
         assertEquals("Ethan", account.getName());
@@ -26,10 +24,9 @@ public class BankAccountTest {
     }
 
     @Test
-    void constructorNegativeInitialisation()
-    {
-       Exception ex = assertThrows(IllegalArgumentException.class, () -> new BankAccount("ACC12345", "Ethan",-100));
-       assertEquals("Balance must be greater than 0.", ex.getMessage());
+    void constructorNegativeInitialisation() {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> new BankAccount("ACC12345", "Ethan", -100));
+        assertEquals("Balance must be greater than 0.", ex.getMessage());
     }
 
     @Test
@@ -41,6 +38,30 @@ public class BankAccountTest {
         account.deposit(depositAmount);
 
         assertEquals(initialBalance + depositAmount, account.getBalance(), "Balance should increase by the deposited amount");
+    }
+
+    @Test
+    void deposit_zeroAmount() {
+        BankAccount account = new BankAccount();
+
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> account.depositNegative(0)
+        );
+
+        assertEquals("Deposit amount must be greater than zero", ex.getMessage());
+    }
+
+    @Test
+    void deposit_negativeAmount() {
+        BankAccount account = new BankAccount();
+
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> account.depositNegative(-50)
+        );
+
+        assertEquals("Deposit amount must be greater than zero", ex.getMessage());
     }
 }
 
